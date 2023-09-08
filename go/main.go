@@ -8,5 +8,5 @@ import (
 
 func main() {
 	bytes, _ := io.ReadAll(os.Stdin)
-	fmt.Println(string(bytes))
+	fmt.Println("I will win")
 }
