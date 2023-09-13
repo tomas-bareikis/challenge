@@ -2,4 +2,4 @@
 
 $input = fgets(STDIN);
 
- fwrite(STDOUT, $input);
+echo "New test";
