@@ -2,3 +2,6 @@
 challenge
 cs/bin
 cs/obj
+
+# IDE files
+.idea
