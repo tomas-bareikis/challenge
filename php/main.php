@@ -2,6 +2,6 @@
 
 $input = fgets(STDIN);
 
-echo "haha34";
+$input = "haha34";
 
  fwrite(STDOUT, $input);
