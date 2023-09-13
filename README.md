@@ -44,6 +44,13 @@ docker run -v ${PWD}/cs:/opt/cs aurelijusbanelis/challenge:cs
 ```
 Where your code is in `cs` folder with `cs/Program.cs` file.
 
+### Shell
+
+```shell
+docker run -v ${PWD}/sh:/opt/sh aurelijusbanelis/challenge:sh
+```
+Where your code is in `sh` folder with `sh/main.sh` file.
+
 
 ### Not trusting docker?
 
@@ -53,6 +60,7 @@ docker build --target go . -t aurelijusbanelis/challenge:go
 docker build --target php . -t aurelijusbanelis/challenge:php
 docker build --target js . -t aurelijusbanelis/challenge:js
 docker build --target cs . -t aurelijusbanelis/challenge:cs
+docker build --target sh . -t aurelijusbanelis/challenge:sh
 ```
 
 See [Dockerfile](Dockerfile) and [GitHub Actions](.github/workflows/infrastructure.yml) for details.
