@@ -42,3 +42,12 @@ VOLUME /opt/cs
 WORKDIR /opt
 ENV LANGUAGE=cs
 CMD ["/opt/challenge", "-test.v"]
+
+FROM ubuntu:22.04 as sh
+COPY --from=builder /app/challenge /opt/challenge
+COPY --from=builder /app/tests /opt/tests
+COPY --from=builder /app/run-sh.sh /opt/run-sh.sh
+VOLUME /opt/sh
+WORKDIR /opt
+ENV LANGUAGE=sh
+CMD ["/opt/challenge", "-test.v"]
