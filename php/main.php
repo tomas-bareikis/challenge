@@ -1,5 +1,3 @@
 <?php
 
-$input = fgets(STDIN);
-
- fwrite(STDOUT, $input);
+echo "hahaha";
