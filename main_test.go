@@ -47,6 +47,34 @@ func doTest(tc *testCase) func(*testing.T) {
 	}
 }
 
+func TestBig(t *testing.T) {
+	lang := os.Getenv("LANGUAGE")
+
+	team1 := "HEHE1 50 "
+	team2 := "HEHE2 51 "
+	team3 := "HEHE3 52 "
+
+	steps := strings.Repeat("1000 ", 1000000)
+
+	in := ""
+	in += team1 + steps + "\n"
+	in += team2 + steps + "\n"
+	in += team3 + steps + "\n"
+
+	out, err := script.Echo(in).Exec("./run-" + lang + ".sh").String()
+	assert.NoError(t, err)
+
+	expected := `HEHE1 1 500000.00
+HEHE2 1 510000.00
+HEHE3 1 520000.00`
+
+	assert.Equal(
+		t,
+		strings.TrimSpace(expected),
+		strings.TrimSpace(out),
+	)
+}
+
 func run(inFile string) (string, error) {
 	lang := os.Getenv("LANGUAGE")
 	return script.File(inFile).Exec("./run-" + lang + ".sh").String()
