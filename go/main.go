@@ -21,22 +21,21 @@ func main() {
 	// Or one could close their eyes before 16MB max size buffer
 	scanner.Buffer(make([]byte, 4096), 16*1024*1024)
 
-	res := make(map[string]teamData)
+	result := make(map[string]teamData)
 	var teamOccurrenceOrder []string
 
 	for scanner.Scan() {
-		f := strings.Fields(scanner.Text())
-
 		var teamName string
 		var stepSize float64
 		var teamData teamData
 
+		f := strings.Fields(scanner.Text())
 		for i := 0; i < len(f); i++ {
 			switch i {
 			case 0:
 				teamName = f[0]
 
-				td, ok := res[teamName]
+				td, ok := result[teamName]
 				if ok {
 					teamData = td
 				} else {
@@ -60,7 +59,7 @@ func main() {
 					teamData.entryCount++
 					teamData.centimetersWalked += entrySum
 				}
-				res[teamName] = teamData
+				result[teamName] = teamData
 			}
 
 		}
@@ -68,20 +67,18 @@ func main() {
 
 	for i := 0; i < len(teamOccurrenceOrder); i++ {
 		key := teamOccurrenceOrder[i]
-		teamData, ok := res[key]
+		teamData, ok := result[key]
 		if !ok {
 			continue
 		}
 
-		delete(res, key)
+		delete(result, key)
 
-		distance := teamData.centimetersWalked
-
-		if distance == 0 {
+		if teamData.centimetersWalked == 0 {
 			continue
 		}
 
-		kilometers := math.Round(float64(distance)/1000) / 100.0
+		kilometers := math.Round(float64(teamData.centimetersWalked)/1000) / 100.0
 		fmt.Fprintf(os.Stdout, "%s %d %.2f\n", key, teamData.entryCount, kilometers)
 	}
 }
