@@ -16,6 +16,11 @@ type teamData struct {
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
+
+	// One could split tokens by space rather than by newline
+	// Or one could close their eyes before 16MB max size buffer
+	scanner.Buffer(make([]byte, 4096), 16*1024*1024)
+
 	res := make(map[string]teamData)
 	var teamOccurrenceOrder []string
 
